@@ -606,7 +606,13 @@ function openLore(personagem){
 function closeLore(){
     document.querySelector(".lore-modal").classList.remove("active");
 }
-
+    
+// TOQUE (mobile) para virar card
+document.querySelectorAll(".vf-card").forEach(card => {
+    card.addEventListener("click", () => {
+        card.classList.toggle("active");
+    });
+});
 </script>
 
 
