@@ -26,28 +26,35 @@ body::after {
     display: none;
 }
 
-/* ─── LANTERNA (desktop only) ─── */
+/* ─── OVERLAY ESCURO PERMANENTE (desktop only) ─── */
+.lantern-dark{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:4;
+    background: rgba(0,0,0,0.82);
+}
+
+/* ─── LANTERNA — luz que segue o mouse (desktop only) ─── */
 .lantern{
     position:fixed;
     inset:0;
     pointer-events:none;
     z-index:5;
-    /* A lanterna é um radial-gradient reposicionado via CSS custom property */
     background: radial-gradient(
-        circle 260px at var(--mx, 50%) var(--my, 50%),
-        rgba(255,200,120,0.07) 0%,
-        rgba(122,0,0,0.04)    35%,
-        transparent           70%
-    ),
-    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.60) 100%);
-    transition: background 0.06s linear;
-    /* Não interfere em cliques */
+        circle 380px at var(--mx, 50%) var(--my, 50%),
+        rgba(255,220,160,0.18) 0%,
+        rgba(200,100,30,0.10)  30%,
+        rgba(80,0,0,0.04)      60%,
+        transparent            100%
+    );
     will-change: background;
 }
 
-/* No mobile, oculta completamente a lanterna */
+/* No mobile, oculta completamente a lanterna e o overlay escuro */
 @media (hover: none) {
     .lantern{ display:none; }
+    .lantern-dark{ display:none; }
 }
 
 /* ─── CURSOR SHADOW (mantido para retrocompatibilidade, mas desativado) ─── */
@@ -251,10 +258,8 @@ p{
 }
 
 /*
-  NOME — estrutura corrigida para desktop e mobile
-  - Não usa position:absolute (evita "nome solto")
-  - Fica sempre na base da frente, centralizado
-  - z-index:2 garante que fique acima do overlay
+  NOME — sempre na base da frente, centralizado
+  Oculta quando o card está virado (mobile .active ou desktop hover)
 */
 .vf-front span{
     position:relative;
@@ -268,7 +273,21 @@ p{
     text-transform:uppercase;
     text-align:center;
     text-shadow:0 2px 10px rgba(0,0,0,1);
-    /* Sem position:absolute — flui com o flex */
+    transition: opacity 0.3s ease;
+}
+
+/* Oculta o nome quando o card está virado no mobile */
+.vf-card.active .vf-front span{
+    opacity:0;
+    pointer-events:none;
+}
+
+/* Oculta o nome no hover do desktop também */
+@media (hover: hover) {
+    .vf-card:hover .vf-front span{
+        opacity:0;
+        pointer-events:none;
+    }
 }
 
 /* ════════════
