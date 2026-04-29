@@ -4,18 +4,25 @@
     box-sizing:border-box;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
     font-family:'Cormorant Garamond', serif;
     overflow:hidden;
 
+    /* FUNDO GARANTIDO */
     background-color:black;
     background-image:url("images/bg.jpg");
-    background-position:center;
-    background-size:cover;
     background-repeat:no-repeat;
+    background-position:center center;
+    background-size:cover;
+
+    color:white;
 }
 
-/* FUNDO */
+/* overlay escuro cinematográfico */
 body::before{
     content:"";
     position:fixed;
@@ -47,7 +54,7 @@ body::before{
     z-index:9999;
 }
 
-/* MENU */
+/* MENU SEM SCROLL */
 .menu{
     position:fixed;
     top:0;
@@ -64,14 +71,15 @@ body::before{
 
     z-index:10;
 
-    overflow-y:hidden;
-    transition:0.5s ease;
+    /* 🔥 REMOVE TOTAL DO SCROLL */
+    overflow:hidden;
 }
 
-/* efeito quando abre painel */
+/* efeito ao abrir painel */
 body.menu-open .menu{
-    transform:translateX(-40px);
+    transform:translateX(-50px);
     opacity:0.3;
+    transition:0.5s ease;
 }
 
 /* LOGO */
@@ -95,16 +103,15 @@ body.menu-open .menu{
     transform:translateX(8px);
 }
 
-/* PAINÉIS */
+/* PAINÉIS (SEM DISPLAY NONE = SEM BUG) */
 .panel{
     position:fixed;
     inset:0;
-    height:100vh;
+
+    padding:80px 15%;
+    overflow-y:auto;
 
     background:rgba(0,0,0,0.85);
-    padding:80px 15%;
-
-    overflow-y:auto;
 
     z-index:5;
 
