@@ -12,13 +12,11 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-
     background-image: url("./images/bg.jpg.PNG");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-
     color: #fff;
 }
 
@@ -27,7 +25,7 @@ body::after {
     display: none;
 }
 
-/* CURSOR */
+/* ─── CURSOR ─── */
 .cursor-shadow{
     position:fixed;
     width:220px;
@@ -40,7 +38,7 @@ body::after {
     z-index:9999;
 }
 
-/* MENU */
+/* ─── MENU ─── */
 .menu{
     position:fixed;
     top:0;
@@ -79,21 +77,17 @@ body.menu-open .menu{
     transform:translateX(8px);
 }
 
-/* PAINÉIS */
+/* ─── PAINÉIS ─── */
 .panel{
     position:fixed;
     inset:0;
     z-index:50;
-
     height:100vh;
     padding:80px 15%;
-
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
-
     background:rgba(0,0,0,0.92);
     backdrop-filter:blur(4px);
-
     opacity:0;
     transform:translateX(40px);
     pointer-events:none;
@@ -118,7 +112,7 @@ p{
     max-width:800px;
 }
 
-/* FECHAR */
+/* ─── FECHAR PAINEL ─── */
 .close{
     position:absolute;
     top:20px;
@@ -128,15 +122,9 @@ p{
     z-index:60;
 }
 
-.vf-card.active .vf-inner{
-    transform:rotateY(180deg) scale(1.01);
-}
-
-.vf-card.active::after{
-    opacity:1;
-}
-
-/* ===== VERDADEIRA FORMA ===== */
+/* ═══════════════════════════════════════════════
+   CARDS — VERDADEIRA FORMA
+   ═══════════════════════════════════════════════ */
 
 .cards-grid{
     width:700px;
@@ -148,7 +136,7 @@ p{
     perspective:2000px;
 }
 
-/* CARD */
+/* ─── Card container ─── */
 .vf-card{
     position:relative;
     width:100%;
@@ -157,49 +145,7 @@ p{
     transform-style:preserve-3d;
 }
 
-/* CONTEÚDO INTERNO */
-.vf-card{
-    position:relative;
-    width:100%;
-    aspect-ratio:1/1;
-    cursor:pointer;
-    transform-style:preserve-3d;
-}
-
-.vf-inner{
-    width:100%;
-    height:100%;
-    position:relative;
-    transition:transform 0.9s cubic-bezier(.2,.8,.2,1);
-    transform-style:preserve-3d;
-}
-/* ===== DESKTOP (HOVER) ===== */
-.vf-card:hover .vf-inner{
-    transform:rotateY(180deg) scale(1.01);
-}
-
-.vf-card:hover::after{
-    opacity:1;
-}
-
-/* ===== MOBILE (TOQUE / ACTIVE) ===== */
-.vf-card .vf-inner{
-    transition: transform 0.9s cubic-bezier(.2,.8,.2,1);
-    transform-style: preserve-3d;
-}
-
-/* apenas desktop com hover */
-@media (hover: hover) {
-    .vf-card:hover .vf-inner{
-        transform: rotateY(180deg) scale(1.01);
-    }
-
-    .vf-card:hover::after{
-        opacity: 1;
-    }
-}
-
-/* GLOW */
+/* ─── Glow ─── */
 .vf-card::after{
     content:"";
     position:absolute;
@@ -207,21 +153,47 @@ p{
     background:radial-gradient(circle, rgba(122,0,0,0.15), transparent 70%);
     opacity:0;
     transition:0.5s ease;
+    pointer-events:none;
+    z-index:1;
 }
 
-.vf-card:hover::after{
+/* ─── Inner (face-rotator) ─── */
+.vf-inner{
+    width:100%;
+    height:100%;
+    position:relative;
+    transition:transform 0.9s cubic-bezier(.2,.8,.2,1);
+    transform-style:preserve-3d;
+}
+
+/* ─── DESKTOP: flip on hover ─── */
+@media (hover: hover) {
+    .vf-card:hover .vf-inner{
+        transform:rotateY(180deg) scale(1.01);
+    }
+    .vf-card:hover::after{
+        opacity:1;
+    }
+}
+
+/* ─── MOBILE: flip on .active (set by JS click) ─── */
+.vf-card.active .vf-inner{
+    transform:rotateY(180deg) scale(1.01);
+}
+.vf-card.active::after{
     opacity:1;
 }
 
-/* frente e verso */
+/* ─── Frente e verso: backface oculta ─── */
 .vf-front,
 .vf-back{
     position:absolute;
     inset:0;
     backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
 }
 
-/* frente */
+/* ─── FRENTE ─── */
 .vf-front{
     background-size:cover;
     background-position:center top;
@@ -250,54 +222,85 @@ p{
     text-transform:uppercase;
 }
 
-/* verso */
+/* ─── VERSO ─── */
 .vf-back{
     background:linear-gradient(145deg, rgba(10,10,10,0.98), rgba(30,0,0,0.98));
     transform:rotateY(180deg);
-    padding:28px;
+
+    /* Layout flexível: empurra botão para baixo */
     display:flex;
     flex-direction:column;
     justify-content:space-between;
+    padding:28px;
+    gap:12px;
+}
+
+/* Agrupa título + parágrafo no topo */
+.vf-back-top{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    flex:1;
+    overflow:hidden;
 }
 
 .vf-back h2{
     color:#7a0000;
     font-family:'Cinzel', serif;
     text-transform:uppercase;
+    font-size:1rem;
+    letter-spacing:2px;
+    flex-shrink:0;
 }
 
 .vf-back p{
-    font-size:1rem;
+    font-size:0.9rem;
     color:rgba(255,255,255,0.85);
+    line-height:1.6;
+    /* Limita o texto a 4 linhas para não vazar */
+    display:-webkit-box;
+    -webkit-line-clamp:4;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    max-width:100%;
+    margin-bottom:0;
 }
 
-.vf-back button{
-    margin-top:25px;
+/* ─── Botão "ler mais" ─── */
+.btn-ler-mais{
+    flex-shrink:0;
+    width:100%;
     padding:12px;
     border:none;
     background:#7a0000;
     color:white;
     font-family:'Cinzel', serif;
+    font-size:0.85rem;
+    letter-spacing:2px;
     cursor:pointer;
-    transition:0.4s;
+    transition:background 0.4s;
+    text-transform:uppercase;
+    /* Garante que fique sempre no fundo, sem sobrepor o título */
+    margin-top:auto;
 }
 
-.vf-back button:hover{
+.btn-ler-mais:hover{
     background:#a10000;
 }
 
-/* MODAL */
+/* ═══════════════════════════════════════════════
+   MODAL DE LORE
+   ═══════════════════════════════════════════════ */
 .lore-modal{
     position:fixed;
     inset:0;
-    z-index:100;
-    background:rgba(0,0,0,0.95);
+    z-index:200;
     display:flex;
     align-items:center;
     justify-content:center;
     opacity:0;
     visibility:hidden;
-    transition:0.4s ease;
+    transition:opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .lore-modal.active{
@@ -305,34 +308,78 @@ p{
     visibility:visible;
 }
 
+/* Overlay escuro clicável */
+.lore-overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.85);
+    cursor:pointer;
+}
+
+/* Caixa de conteúdo */
 .lore-content{
+    position:relative;
+    z-index:201;
     width:90%;
     max-width:600px;
     max-height:80vh;
     overflow-y:auto;
-    background:linear-gradient(145deg, rgba(10,10,10,0.98), rgba(20,0,0,0.98));
-    padding:40px;
-    border:1px solid rgba(122,0,0,0.3);
+    -webkit-overflow-scrolling:touch;
+    background:linear-gradient(145deg, rgba(10,10,10,0.99), rgba(20,0,0,0.99));
+    padding:48px 40px 40px;
+    border:1px solid rgba(122,0,0,0.35);
+    /* Animação de entrada */
+    transform:translateY(20px);
+    transition:transform 0.4s ease;
 }
 
+.lore-modal.active .lore-content{
+    transform:translateY(0);
+}
+
+/* Título dentro do modal */
+#lore-title{
+    color:#7a0000;
+    font-family:'Cinzel', serif;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:1.1rem;
+    margin-bottom:20px;
+}
+
+/* Parágrafos dentro do modal — sem max-width restritivo */
+#lore-text p{
+    font-size:1rem;
+    line-height:1.75;
+    color:rgba(255,255,255,0.88);
+    max-width:100%;
+    margin-bottom:8px;
+}
+
+/* Botão fechar do modal */
 .close-lore{
     position:absolute;
-    top:15px;
+    top:16px;
     right:20px;
-    font-size:24px;
+    font-size:22px;
     cursor:pointer;
     color:#7a0000;
+    background:none;
+    border:none;
+    line-height:1;
+    padding:4px;
+    transition:color 0.3s;
 }
 
-/* ❌ CORREÇÃO IMPORTANTE */
-#verdadeira-forma{
-    /* removido display:flex (isso quebrava layout do painel) */
+.close-lore:hover{
+    color:#ff2222;
 }
 
-/* RESPONSIVO */
+/* ─── RESPONSIVO ─── */
 @media(max-width:900px){
     .cards-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
+        width:100%;
     }
 
     .panel{
@@ -341,11 +388,33 @@ p{
 }
 
 @media(max-width:600px){
+    .cards-grid{
+        grid-template-columns:1fr;
+    }
+
     .panel{
         padding:50px 5%;
     }
 
     .lore-content{
-        padding:25px;
+        padding:40px 22px 28px;
+    }
+
+    .vf-back{
+        padding:18px;
+    }
+
+    .vf-back h2{
+        font-size:0.9rem;
+    }
+
+    .vf-back p{
+        font-size:0.82rem;
+        -webkit-line-clamp:3;
+    }
+
+    .btn-ler-mais{
+        padding:10px;
+        font-size:0.78rem;
     }
 }
