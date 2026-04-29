@@ -471,11 +471,13 @@ calor, presença, algo que não seja… interno.</p>
 
 </div>
 
-<!-- CALCANHAR DE AQUILES -->
 <div id="calcanhar-de-aquiles" class="panel">
 <div class="close" onclick="closePanel()">✕</div>
 
 <h1>CALCANHAR DE AQUILES</h1>
+
+<!-- ENIGMA -->
+<div id="enigma-box">
 
 <p>há algo aqui que não deve ser tocado diretamente.</p>
 <p>nem todo conhecimento está acessível sem custo.</p>
@@ -508,9 +510,26 @@ font-family:serif;
 confirmar
 </button>
 
-<br><br>
-
 <p id="resultado-enigma"></p>
+
+</div>
+
+<!-- CONTEÚDO BLOQUEADO -->
+<div id="conteudo-calcanhar" style="display:none;">
+
+<p><b>*I. quando alguém se torna exceção*</b><br>
+noctharis funciona por padrão: observa, mede, decide. até que alguém deixa de ser padrão. quando permanecem sem pedir nada. isso quebra a lógica dele. em sua equação, a solidão é o x da questão.</p>
+
+<br>
+
+<p><b>*II. proteger é onde ele se perde*</b><br>
+não no sentido nobre.<br>
+no sentido absoluto. quando hades decide proteger, não há limites. e resolver, para ele, é definitivo. o ponto frágil de hades não é o poder. é o momento em que decide usá-lo por alguém. não há meio-termo. é aí que o controle falha. já falhou.</p>
+
+<br>
+
+<p><b>*III. ele ainda reconhece o momento em que deveria parar*</b><br>
+esse é o ponto mais delicado. noctharis sabe. sempre sabe. o instante exato em que aquilo deixou de ser necessário e passou a ser excesso. e mesmo assim… continua. porque parar significaria admitir que ainda existe algo nele capaz de escolher diferente. e não há. as sombras, mesmo que não queira, é o que lhe resta.</p>
 
 </div>
     
@@ -562,16 +581,11 @@ function verificarEnigma() {
         resultado.innerText = "✔ correto.";
         resultado.style.color = "#7a0000";
 
-        // fecha todas as abas abertas
-        document.querySelectorAll(".panel").forEach(p => {
-            p.classList.remove("active");
-        });
+        // esconder enigma
+        document.getElementById("enigma-box").style.display = "none";
 
-        // abre Calcanhar de Aquiles
-        document.getElementById("calcanhar-de-aquiles").classList.add("active");
-
-        // mantém efeito do menu escuro
-        document.body.classList.add("menu-open");
+        // mostrar conteúdo
+        document.getElementById("conteudo-calcanhar").style.display = "block";
 
     } else {
         resultado.innerText = "✖ incorreto.";
