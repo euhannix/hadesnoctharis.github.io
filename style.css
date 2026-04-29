@@ -18,6 +18,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #fff;
+    font-family: 'Cormorant Garamond', serif;
 }
 
 body::before,
@@ -43,7 +44,7 @@ body::after {
     position:fixed;
     top:0;
     left:0;
-    width:180px;
+    width:200px;
     height:100vh;
     padding:40px 25px;
     display:flex;
@@ -59,17 +60,19 @@ body.menu-open .menu{
 }
 
 .logo{
-    width:180px;
+    width:160px;
     margin-bottom:30px;
 }
 
 .menu a{
     color:white;
     text-decoration:none;
-    font-size:1.2rem;
+    font-size:0.72rem;
     letter-spacing:4px;
     cursor:pointer;
     transition:0.3s;
+    font-family:'Cinzel', serif;
+    text-transform:uppercase;
 }
 
 .menu a:hover{
@@ -83,7 +86,7 @@ body.menu-open .menu{
     inset:0;
     z-index:50;
     height:100vh;
-    padding:80px 15%;
+    padding:80px 15% 80px 15%;
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     background:rgba(0,0,0,0.92);
@@ -102,47 +105,58 @@ body.menu-open .menu{
 
 h1{
     color:#7a0000;
-    margin-bottom:20px;
+    margin-bottom:24px;
+    font-family:'Cinzel', serif;
+    font-size:1.2rem;
+    letter-spacing:5px;
+    text-transform:uppercase;
 }
 
 p{
-    font-size:1.1rem;
-    line-height:1.7;
+    font-size:1.05rem;
+    line-height:1.8;
     margin-bottom:10px;
     max-width:800px;
 }
 
 /* ─── FECHAR PAINEL ─── */
 .close{
-    position:absolute;
-    top:20px;
-    right:25px;
+    position:sticky;
+    top:0;
+    float:right;
     font-size:24px;
     cursor:pointer;
     z-index:60;
+    padding:4px 0 4px 12px;
+    color:rgba(255,255,255,0.55);
+    transition:color 0.3s;
 }
+.close:hover{ color:#fff; }
 
-/* ═══════════════════════════════════════════════
+
+/* ═══════════════════════════════════════════════════════
    CARDS — VERDADEIRA FORMA
-   ═══════════════════════════════════════════════ */
+   Formato: banner horizontal, 1 por linha, sem corte
+   ═══════════════════════════════════════════════════════ */
 
 .cards-grid{
-    width:700px;
-    max-width:100%;
+    width:100%;
+    max-width:660px;
     margin-top:40px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:2px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
     perspective:2000px;
 }
 
-/* ─── Card container ─── */
+/* ─── Card container — altura de banner ─── */
 .vf-card{
     position:relative;
     width:100%;
-    aspect-ratio:1/1;
+    height:240px;
     cursor:pointer;
     transform-style:preserve-3d;
+    flex-shrink:0;
 }
 
 /* ─── Glow ─── */
@@ -150,14 +164,14 @@ p{
     content:"";
     position:absolute;
     inset:0;
-    background:radial-gradient(circle, rgba(122,0,0,0.15), transparent 70%);
+    background:radial-gradient(circle, rgba(122,0,0,0.18), transparent 70%);
     opacity:0;
     transition:0.5s ease;
     pointer-events:none;
     z-index:1;
 }
 
-/* ─── Inner (face-rotator) ─── */
+/* ─── Inner ─── */
 .vf-inner{
     width:100%;
     height:100%;
@@ -166,19 +180,19 @@ p{
     transform-style:preserve-3d;
 }
 
-/* ─── DESKTOP: flip on hover ─── */
+/* ─── DESKTOP: hover flip (CSS puro) ─── */
 @media (hover: hover) {
     .vf-card:hover .vf-inner{
-        transform:rotateY(180deg) scale(1.01);
+        transform:rotateY(180deg);
     }
     .vf-card:hover::after{
         opacity:1;
     }
 }
 
-/* ─── MOBILE: flip on .active (set by JS click) ─── */
+/* ─── MOBILE / TOUCH: flip via .active (JS) ─── */
 .vf-card.active .vf-inner{
-    transform:rotateY(180deg) scale(1.01);
+    transform:rotateY(180deg);
 }
 .vf-card.active::after{
     opacity:1;
@@ -193,100 +207,113 @@ p{
     -webkit-backface-visibility:hidden;
 }
 
-/* ─── FRENTE ─── */
+/* ════════════
+   FRENTE
+   ════════════ */
 .vf-front{
+    /* contain: imagem completa sem corte */
     background-size:cover;
-    background-position:center top;
+    background-position:center center;
     display:flex;
     align-items:flex-end;
-    padding:25px;
+    overflow:hidden;
 }
 
+/* gradiente na base para o nome ficar legível */
 .vf-front .overlay{
     position:absolute;
     inset:0;
-    background:radial-gradient(
-        ellipse at center,
-        rgba(0,0,0,0) 70%,
-        rgba(0,0,0,0.18) 100%
+    background:linear-gradient(
+        to top,
+        rgba(0,0,0,0.80) 0%,
+        rgba(0,0,0,0.15) 45%,
+        rgba(0,0,0,0)    100%
     );
     pointer-events:none;
 }
 
+/* nome — fixo na base da frente */
 .vf-front span{
     position:relative;
     z-index:2;
     font-family:'Cinzel', serif;
-    letter-spacing:4px;
-    font-size:1rem;
+    letter-spacing:5px;
+    font-size:0.85rem;
     text-transform:uppercase;
+    padding:16px 22px;
+    width:100%;
+    text-shadow:0 2px 10px rgba(0,0,0,1);
 }
 
-/* ─── VERSO ─── */
+/* ════════════
+   VERSO
+   ════════════ */
 .vf-back{
-    background:linear-gradient(145deg, rgba(10,10,10,0.98), rgba(30,0,0,0.98));
+    background:linear-gradient(145deg, rgba(8,8,8,0.99), rgba(28,0,0,0.99));
     transform:rotateY(180deg);
-
-    /* Layout flexível: empurra botão para baixo */
+    /* flex coluna: conteúdo em cima, botão sempre embaixo */
     display:flex;
     flex-direction:column;
-    justify-content:space-between;
-    padding:28px;
-    gap:12px;
+    padding:24px 26px 20px;
 }
 
-/* Agrupa título + parágrafo no topo */
+/* bloco superior: título + parágrafo */
 .vf-back-top{
     display:flex;
     flex-direction:column;
     gap:10px;
     flex:1;
     overflow:hidden;
+    min-height:0;
 }
 
 .vf-back h2{
     color:#7a0000;
     font-family:'Cinzel', serif;
     text-transform:uppercase;
-    font-size:1rem;
-    letter-spacing:2px;
+    font-size:0.88rem;
+    letter-spacing:3px;
     flex-shrink:0;
+    line-height:1.3;
 }
 
-.vf-back p{
-    font-size:0.9rem;
-    color:rgba(255,255,255,0.85);
-    line-height:1.6;
-    /* Limita o texto a 4 linhas para não vazar */
+/* parágrafo — clampado para não invadir o botão */
+.vf-back-top p{
+    font-size:0.86rem !important;
+    color:rgba(255,255,255,0.82) !important;
+    line-height:1.65 !important;
     display:-webkit-box;
-    -webkit-line-clamp:4;
+    -webkit-line-clamp:3;
     -webkit-box-orient:vertical;
     overflow:hidden;
-    max-width:100%;
-    margin-bottom:0;
+    max-width:100% !important;
+    margin-bottom:0 !important;
 }
 
-/* ─── Botão "ler mais" ─── */
+/* ─── botão: sempre colado na base ─── */
 .btn-ler-mais{
     flex-shrink:0;
     width:100%;
-    padding:12px;
+    padding:11px 0;
+    margin-top:14px;
     border:none;
     background:#7a0000;
     color:white;
     font-family:'Cinzel', serif;
-    font-size:0.85rem;
-    letter-spacing:2px;
+    font-size:0.75rem;
+    letter-spacing:3px;
     cursor:pointer;
-    transition:background 0.4s;
+    transition:background 0.35s;
     text-transform:uppercase;
-    /* Garante que fique sempre no fundo, sem sobrepor o título */
-    margin-top:auto;
+    /* garante que z-index não conflite com o glow do card */
+    position:relative;
+    z-index:2;
 }
 
 .btn-ler-mais:hover{
     background:#a10000;
 }
+
 
 /* ═══════════════════════════════════════════════
    MODAL DE LORE
@@ -308,27 +335,24 @@ p{
     visibility:visible;
 }
 
-/* Overlay escuro clicável */
 .lore-overlay{
     position:absolute;
     inset:0;
-    background:rgba(0,0,0,0.85);
+    background:rgba(0,0,0,0.88);
     cursor:pointer;
 }
 
-/* Caixa de conteúdo */
 .lore-content{
     position:relative;
     z-index:201;
     width:90%;
     max-width:600px;
-    max-height:80vh;
+    max-height:82vh;
     overflow-y:auto;
     -webkit-overflow-scrolling:touch;
     background:linear-gradient(145deg, rgba(10,10,10,0.99), rgba(20,0,0,0.99));
     padding:48px 40px 40px;
     border:1px solid rgba(122,0,0,0.35);
-    /* Animação de entrada */
     transform:translateY(20px);
     transition:transform 0.4s ease;
 }
@@ -337,26 +361,23 @@ p{
     transform:translateY(0);
 }
 
-/* Título dentro do modal */
 #lore-title{
     color:#7a0000;
     font-family:'Cinzel', serif;
     text-transform:uppercase;
-    letter-spacing:3px;
-    font-size:1.1rem;
-    margin-bottom:20px;
+    letter-spacing:4px;
+    font-size:1rem;
+    margin-bottom:22px;
 }
 
-/* Parágrafos dentro do modal — sem max-width restritivo */
 #lore-text p{
     font-size:1rem;
-    line-height:1.75;
+    line-height:1.8;
     color:rgba(255,255,255,0.88);
     max-width:100%;
     margin-bottom:8px;
 }
 
-/* Botão fechar do modal */
 .close-lore{
     position:absolute;
     top:16px;
@@ -370,51 +391,131 @@ p{
     padding:4px;
     transition:color 0.3s;
 }
+.close-lore:hover{ color:#ff3333; }
 
-.close-lore:hover{
-    color:#ff2222;
+
+/* ═══════════════════════════════════════════════
+   PLAYLIST — embed Spotify
+   ═══════════════════════════════════════════════ */
+.playlist-wrapper{
+    margin-top:32px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    width:100%;
 }
 
-/* ─── RESPONSIVO ─── */
-@media(max-width:900px){
-    .cards-grid{
-        grid-template-columns:1fr 1fr;
-        width:100%;
-    }
+.playlist-wrapper iframe{
+    border:none;
+    border-radius:0;
+    width:100%;
+    max-width:560px;
+    height:380px;
+    box-shadow:0 0 50px rgba(122,0,0,0.18);
+    display:block;
+}
 
+.playlist-hint{
+    font-size:0.72rem;
+    color:rgba(255,255,255,0.3);
+    letter-spacing:2px;
+    text-align:center;
+    font-family:'Cinzel', serif;
+    text-transform:uppercase;
+}
+
+
+/* ═══════════════════════════════════════════════
+   FOOTER — "por Hannix"
+   ═══════════════════════════════════════════════ */
+.site-footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:15;
+    padding:12px 20px;
+    text-align:center;
+    /* não bloqueia cliques no site */
+    pointer-events:none;
+}
+
+.site-footer a{
+    pointer-events:auto;
+    color:rgba(255,255,255,0.18);
+    text-decoration:none;
+    font-family:'Cinzel', serif;
+    font-size:0.6rem;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    transition:color 0.5s ease;
+}
+
+.site-footer a:hover{
+    color:rgba(122,0,0,0.75);
+}
+
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVO
+   ═══════════════════════════════════════════════ */
+@media(max-width:900px){
     .panel{
-        padding:60px 8%;
+        padding:60px 8% 80px;
+    }
+    .vf-card{
+        height:210px;
     }
 }
 
 @media(max-width:600px){
-    .cards-grid{
-        grid-template-columns:1fr;
+    .menu{
+        width:155px;
+        padding:28px 16px;
+    }
+    .menu a{
+        font-size:0.62rem;
+        letter-spacing:3px;
+    }
+    .logo{
+        width:120px;
     }
 
     .panel{
-        padding:50px 5%;
+        padding:50px 5% 80px;
     }
 
-    .lore-content{
-        padding:40px 22px 28px;
+    .vf-card{
+        height:180px;
     }
 
     .vf-back{
-        padding:18px;
+        padding:16px 16px 14px;
     }
 
     .vf-back h2{
-        font-size:0.9rem;
+        font-size:0.78rem;
+        letter-spacing:2px;
     }
 
-    .vf-back p{
-        font-size:0.82rem;
-        -webkit-line-clamp:3;
+    .vf-back-top p{
+        font-size:0.76rem !important;
+        -webkit-line-clamp:2;
     }
 
     .btn-ler-mais{
-        padding:10px;
-        font-size:0.78rem;
+        padding:9px 0;
+        font-size:0.68rem;
+        letter-spacing:2px;
+        margin-top:10px;
+    }
+
+    .lore-content{
+        padding:40px 18px 26px;
+    }
+
+    .playlist-wrapper iframe{
+        height:280px;
     }
 }
