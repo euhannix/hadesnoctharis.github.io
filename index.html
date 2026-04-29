@@ -427,11 +427,15 @@ document.querySelectorAll(".menu a").forEach(link => {
 
         document.querySelectorAll(".panel").forEach(p => {
             p.classList.remove("active");
-            p.scrollTop = 0;
         });
 
-        painel.scrollTop = 0;
         painel.classList.add("active");
+        painel.scrollTop = 0;
+
+        // força repaint (corrige bug de “não abre nada” em alguns casos)
+        requestAnimationFrame(() => {
+            painel.style.transform = "translateX(0)";
+        });
     });
 });
 
@@ -440,9 +444,9 @@ function closePanel(){
 
     document.querySelectorAll(".panel").forEach(p => {
         p.classList.remove("active");
-        p.scrollTop = 0;
     });
 }
+
 function verificarEnigma() {
 
     const resposta = document.getElementById("enigma-input").value.trim().toLowerCase();
@@ -453,10 +457,7 @@ function verificarEnigma() {
         resultado.innerText = "✔ correto.";
         resultado.style.color = "#7a0000";
 
-        // esconder enigma
         document.getElementById("enigma-box").style.display = "none";
-
-        // mostrar conteúdo
         document.getElementById("conteudo-calcanhar").style.display = "block";
 
     } else {
