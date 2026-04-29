@@ -7,10 +7,9 @@
 body{
     font-family:'Cormorant Garamond', serif;
     overflow-x:hidden;
-    background:black;
+    background:black url("images/bg.jpg") center/cover no-repeat;
     color:white;
     min-height:100vh;
-    position:relative;
 }
 
 /* FUNDO */
