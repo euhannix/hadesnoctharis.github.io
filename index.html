@@ -105,7 +105,7 @@ o portador das sombras a matou.</p>
 
 <br>
 
-<p>insento de intenção, mas consumido pela culpa. o excesso, excesso de poder, de necessidade, de incapacidade de parar. desde então, nele coexistem duas presenças: o homem que foi e aquilo que um noctharis, inevitavelmente, se torna. uma família com a maldição de serem corrompidos pelo próprio poder. pelo próprio excesso.</p>
+<p>isento de intenção, mas consumido pela culpa. o excesso, excesso de poder, de necessidade, de incapacidade de parar. desde então, nele coexistem duas presenças: o homem que foi e aquilo que um noctharis, inevitavelmente, se torna. uma família com a maldição de serem corrompidos pelo próprio poder. pelo próprio excesso.</p>
 
 <br>
 
@@ -273,9 +273,7 @@ restou-lhe apenas ser.</p>
 </div>
 
 <!-- VERDADEIRA FORMA -->
-<!-- VERDADEIRA FORMA -->
 <div id="verdadeira-forma" class="panel">
-
 <div class="close" onclick="closePanel()">✕</div>
 
 <h1>VERDADEIRA FORMA</h1>
@@ -285,7 +283,6 @@ restou-lhe apenas ser.</p>
     <!-- CARD 1 -->
     <div class="vf-card">
         <div class="vf-inner">
-
             <div class="vf-front" style="background-image:url('images/cardum.jpg');">
                 <div class="overlay"></div>
                 <span>hannibal lecter</span>
@@ -293,7 +290,6 @@ restou-lhe apenas ser.</p>
 
             <div class="vf-back">
                 <h2>hannibal lecter</h2>
-
                 <p>
                 ah, hannibal.
                 convém começar por ele, suponho.
@@ -305,14 +301,12 @@ restou-lhe apenas ser.</p>
                 ler mais
                 </button>
             </div>
-
         </div>
     </div>
 
     <!-- CARD 2 -->
     <div class="vf-card">
         <div class="vf-inner">
-
             <div class="vf-front" style="background-image:url('images/carddois.jpg');">
                 <div class="overlay"></div>
                 <span>itachi uchiha</span>
@@ -320,7 +314,6 @@ restou-lhe apenas ser.</p>
 
             <div class="vf-back">
                 <h2>itachi uchiha</h2>
-
                 <p>
                 existem pessoas cansadas.
                 e existem aquelas que ultrapassaram o próprio limite há tanto tempo…
@@ -331,14 +324,12 @@ restou-lhe apenas ser.</p>
                 ler mais
                 </button>
             </div>
-
         </div>
     </div>
 
     <!-- CARD 3 -->
     <div class="vf-card">
         <div class="vf-inner">
-
             <div class="vf-front" style="background-image:url('images/cardtres.jpg');">
                 <div class="overlay"></div>
                 <span>drácula</span>
@@ -346,7 +337,6 @@ restou-lhe apenas ser.</p>
 
             <div class="vf-back">
                 <h2>drácula</h2>
-
                 <p>
                 alguns amores salvam.
                 outros apodrecem lentamente até se tornarem maldição.
@@ -357,14 +347,12 @@ restou-lhe apenas ser.</p>
                 ler mais
                 </button>
             </div>
-
         </div>
     </div>
 
     <!-- CARD 4 -->
     <div class="vf-card">
         <div class="vf-inner">
-
             <div class="vf-front" style="background-image:url('images/cardquatro.jpg');">
                 <div class="overlay"></div>
                 <span>tom riddle</span>
@@ -372,7 +360,6 @@ restou-lhe apenas ser.</p>
 
             <div class="vf-back">
                 <h2>tom riddle</h2>
-
                 <p>
                 tom nunca teve medo de poder.
                 teve medo daquilo que poderia sentir.
@@ -385,7 +372,6 @@ restou-lhe apenas ser.</p>
                 ler mais
                 </button>
             </div>
-
         </div>
     </div>
 
@@ -428,6 +414,7 @@ calor, presença, algo que não seja… interno.</p>
 
 </div>
 
+<!-- CALCANHAR DE AQUILES -->
 <div id="calcanhar-de-aquiles" class="panel">
 <div class="close" onclick="closePanel()">✕</div>
 
@@ -489,10 +476,12 @@ no sentido absoluto. quando hades decide proteger, não há limites. e resolver,
 esse é o ponto mais delicado. noctharis sabe. sempre sabe. o instante exato em que aquilo deixou de ser necessário e passou a ser excesso. e mesmo assim… continua. porque parar significaria admitir que ainda existe algo nele capaz de escolher diferente. e não há. as sombras, mesmo que não queira, é o que lhe resta.</p>
 
 </div>
-    
+</div>
+
 <!-- PAVOR -->
 <div id="pavor" class="panel">
 <div class="close" onclick="closePanel()">✕</div>
+<h1>PAVOR</h1>
 <p><b>I. ele ainda está presente</b></p>
 
 <br>
@@ -520,6 +509,7 @@ mas teme. teme que novamente, mais uma vez, esteja em uma posição em que preci
 </p>
 
 </div>
+
 <!-- PLAYLIST -->
 <div id="playlist" class="panel">
 <div class="close" onclick="closePanel()">✕</div>
@@ -527,11 +517,22 @@ mas teme. teme que novamente, mais uma vez, esteja em uma posição em que preci
 <p>(vazio)</p>
 </div>
 
-<script>
+<!-- =========================================
+MODAL LORE
+========================================= -->
 
+<div id="lore-modal" class="lore-modal">
+    <div class="lore-content">
+        <div class="close-lore" onclick="closeLore()">
+            ✕
+        </div>
+        <div id="lore-text"></div>
+    </div>
+</div>
+
+<script>
 document.querySelectorAll(".menu a").forEach(link => {
     link.addEventListener("click", () => {
-
         const id = link.getAttribute("data-panel");
         const painel = document.getElementById(id);
 
@@ -546,7 +547,7 @@ document.querySelectorAll(".menu a").forEach(link => {
         painel.classList.add("active");
         painel.scrollTop = 0;
 
-        // força repaint (corrige bug de “não abre nada” em alguns casos)
+        // força repaint (corrige bug de "não abre nada" em alguns casos)
         requestAnimationFrame(() => {
             painel.style.transform = "translateX(0)";
         });
@@ -562,12 +563,10 @@ function closePanel(){
 }
 
 function verificarEnigma() {
-
     const resposta = document.getElementById("enigma-input").value.trim().toLowerCase();
     const resultado = document.getElementById("resultado-enigma");
 
     if (resposta === "sombra") {
-
         resultado.innerText = "✔ correto.";
         resultado.style.color = "#7a0000";
 
@@ -578,6 +577,98 @@ function verificarEnigma() {
         resultado.innerText = "✖ incorreto.";
         resultado.style.color = "white";
     }
+}
+
+/* =========================================
+TEXTOS DOS CARDS
+========================================= */
+
+const loreTexts = {
+    hannibal: `
+        <h2>HANNIBAL LECTER</h2>
+        <p>
+        ah, hannibal.
+        convém começar por ele, suponho.
+        afinal, existem pessoas que conversam…
+        e existem aquelas que dissecam.
+        </p>
+        <p>
+        hades noctharis se conecta a hannibal pela forma como observa o mundo.
+        os dois possuem algo perigosamente semelhante:
+        a capacidade de ler pessoas como quem abre um livro já conhecido.
+        </p>
+        <p>
+        micro expressões.
+        hesitações.
+        mudanças mínimas no tom de voz.
+        medo.
+        </p>
+        <p>
+        nada passa despercebido.
+        e talvez seja justamente isso que torne ambos tão desconfortáveis.
+        </p>
+    `,
+    itachi: `
+        <h2>ITACHI UCHIHA</h2>
+        <p>
+        existem pessoas cansadas.
+        e existem aquelas que ultrapassaram o próprio limite há tanto tempo…
+        que esqueceram como parar.
+        </p>
+        <p>
+        itachi é provavelmente o mais próximo da essência de hades.
+        </p>
+        <p>
+        os dois carregam um peso silencioso.
+        sofrem sem espetáculo.
+        amam sem conseguir demonstrar corretamente.
+        </p>
+    `,
+    dracula: `
+        <h2>DRÁCULA</h2>
+        <p>
+        alguns amores salvam.
+        outros apodrecem lentamente até se tornarem maldição.
+        hades compreenderia ambos.
+        </p>
+        <p>
+        drácula representa a parte melancólica de noctharis.
+        o amor que se torna ruína.
+        a eternidade carregada como punição.
+        </p>
+    `,
+    tom: `
+        <h2>TOM RIDDLE</h2>
+        <p>
+        tom nunca teve medo de poder.
+        teve medo daquilo que poderia sentir.
+        e hades…
+        bom.
+        isso explica muita coisa.
+        </p>
+        <p>
+        os dois odeiam vulnerabilidade.
+        emoção demais é vista como risco.
+        fraqueza é algo que deve ser enterrado.
+        </p>
+    `
+};
+
+/* =========================================
+ABRIR MODAL
+========================================= */
+
+function openLore(character){
+    document.getElementById("lore-modal").classList.add("active");
+    document.getElementById("lore-text").innerHTML = loreTexts[character];
+}
+
+/* =========================================
+FECHAR MODAL
+========================================= */
+
+function closeLore(){
+    document.getElementById("lore-modal").classList.remove("active");
 }
 </script>
 
