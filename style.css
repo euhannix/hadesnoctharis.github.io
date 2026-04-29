@@ -61,8 +61,7 @@ body::before{
 
     z-index:10;
 
-    overflow-y:auto;
-
+    overflow-y:hidden; /* <- aqui remove o scroll */
     transition:0.5s ease;
 }
 
