@@ -6,7 +6,7 @@
 
 body{
     font-family:'Cormorant Garamond', serif;
-    overflow-x:hidden;
+    overflow:hidden;
     background:black url("images/bg.jpg") center/cover no-repeat;
     color:white;
     min-height:100vh;
