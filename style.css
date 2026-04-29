@@ -150,3 +150,14 @@ p{
     font-size:22px;
     cursor:pointer;
 }
+.cursor-shadow{
+    position:fixed;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:rgba(122,0,0,0.4);
+    pointer-events:none;
+    transform:translate(-50%, -50%);
+    filter:blur(8px);
+    z-index:9999;
+}
