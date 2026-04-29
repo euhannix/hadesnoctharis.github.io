@@ -526,7 +526,14 @@ mas teme. teme que novamente, mais uma vez, esteja em uma posição em que preci
 <h1>PLAYLIST</h1>
 <p>(vazio)</p>
 </div>
-
+    
+    <!-- LORE MODAL -->
+<div class="lore-modal">
+    <div class="lore-content">
+        <div class="close-lore" onclick="closeLore()">✕</div>
+        <p id="lore-text"></p>
+    </div>
+</div>
 <script>
 
 document.querySelectorAll(".menu a").forEach(link => {
@@ -579,7 +586,30 @@ function verificarEnigma() {
         resultado.style.color = "white";
     }
 }
+    const loreData = {
+    hannibal: "Hannibal Lecter representa inteligência, controle e caos.",
+    itachi: "Itachi Uchiha representa sacrifício e dor silenciosa.",
+    dracula: "Drácula representa maldição, amor e imortalidade.",
+    tom: "Tom Riddle representa ambição e corrupção pelo poder."
+};
+
+function openLore(personagem){
+
+    const modal = document.querySelector(".lore-modal");
+    const text = document.getElementById("lore-text");
+
+    text.innerText = loreData[personagem] || "Sem informação.";
+
+    modal.classList.add("active");
+}
+
+function closeLore(){
+    document.querySelector(".lore-modal").classList.remove("active");
+}
+
 </script>
+
 
 </body>
 </html>
+
