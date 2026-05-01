@@ -236,7 +236,6 @@ p{
 .vf-front{
     background-size:cover;
     background-position:center center;
-    /* Flex em coluna: imagem ocupa tudo, nome fica na base */
     display:flex;
     flex-direction:column;
     justify-content:flex-end;
@@ -257,10 +256,6 @@ p{
     pointer-events:none;
 }
 
-/*
-  NOME — sempre na base da frente, centralizado
-  Oculta quando o card está virado (mobile .active ou desktop hover)
-*/
 .vf-front span{
     position:relative;
     z-index:2;
@@ -296,7 +291,6 @@ p{
 .vf-back{
     background:linear-gradient(145deg, rgba(8,8,8,0.99), rgba(28,0,0,0.99));
     transform:rotateY(180deg);
-    /* flex coluna: conteúdo em cima, botão sempre embaixo */
     display:flex;
     flex-direction:column;
     padding:24px 26px 20px;
@@ -501,6 +495,64 @@ p{
 
 
 /* ═══════════════════════════════════════════════
+   PAINEL VOZ — embed YouTube
+   ═══════════════════════════════════════════════ */
+
+.voz-video-wrapper{
+    margin-top:36px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:16px;
+    width:100%;
+}
+
+/*
+  Técnica de proporção responsiva 16:9:
+  padding-bottom de 56.25% força a altura proporcional à largura.
+  O iframe fica absoluto dentro e ocupa 100% do espaço calculado.
+  NÃO altere o padding-bottom — é o que mantém o 16:9 em qualquer tela.
+*/
+.voz-video-container{
+    position:relative;
+    width:100%;
+    max-width:560px;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+
+    /* Glow vermelho escuro — mesma linguagem da playlist e dos cards */
+    box-shadow:
+        0 0 40px rgba(122,0,0,0.30),
+        0 0 80px rgba(122,0,0,0.12);
+
+    /* Borda sutil — mesma do modal de lore */
+    border:1px solid rgba(122,0,0,0.25);
+}
+
+.voz-video-container iframe{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    display:block;
+    border:none;
+}
+
+.voz-hint{
+    font-size:0.72rem !important;
+    color:rgba(255,255,255,0.3) !important;
+    letter-spacing:2px;
+    text-align:center;
+    font-family:'Cinzel', serif;
+    text-transform:uppercase;
+    margin-bottom:0 !important;
+    max-width:100% !important;
+}
+
+
+/* ═══════════════════════════════════════════════
    RESPONSIVO
    ═══════════════════════════════════════════════ */
 @media(max-width:900px){
@@ -560,5 +612,12 @@ p{
 
     .playlist-wrapper iframe{
         height:280px;
+    }
+
+    /* No mobile o glow fica mais discreto */
+    .voz-video-container{
+        box-shadow:
+            0 0 24px rgba(122,0,0,0.25),
+            0 0 50px rgba(122,0,0,0.08);
     }
 }
